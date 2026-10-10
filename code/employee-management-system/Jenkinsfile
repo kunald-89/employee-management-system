@@ -21,7 +21,7 @@ pipeline {
         }
       }
     }
-    stage('Container build') { steps { sh 'docker compose -f docker-compose.yml build' } }
+    stage('Container build') { steps { sh 'docker compose -f compose.yaml build' } }
   }
   post { always { echo 'EMS CI checks finished. Add integration tests and security scanning before production.' } }
 }
