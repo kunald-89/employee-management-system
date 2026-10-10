@@ -9,6 +9,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+    /*
+     * DEVELOPMENT SCAFFOLD ONLY.
+     * The employee endpoints are temporarily open so the React CRUD screen can
+     * be connected during the first implementation step. Do not deploy this
+     * configuration. The next migration step replaces it with JWT authentication
+     * and ADMIN / HR / EMPLOYEE authorization rules.
+     */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
