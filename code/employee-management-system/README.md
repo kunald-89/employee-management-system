@@ -54,7 +54,7 @@ The **Employee Management System** is a learning-focused full-stack project for 
 
 ## 🏗️ Project Structure
 
-\`\`\`text
+```text
 employee-management-system/
 ├── frontend/
 │   ├── src/
@@ -107,13 +107,13 @@ employee-management-system/
 ├── .gitignore
 ├── .env.example
 └── README.md
-\`\`\`
+```
 
 ## 🔄 Application Workflow
 
 ### 1. 👩‍💻 Development to deployment
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
     A["👩‍💻 Developer writes code"] --> B["📦 Git commit & push"]
     B --> C["🐙 GitHub repository"]
@@ -129,13 +129,13 @@ flowchart TD
     L --> M["🖥️ React frontend"]
     L --> N["🔌 Express REST API"]
     N --> O["🗄️ PostgreSQL database"]
-\`\`\`
+```
 
 > ℹ️ The current Jenkins pipeline checks backend syntax, builds the frontend and builds Docker images. Registry push and automated EKS deployment are future enhancements, not yet configured.
 
 ### 2. 🔐 Login and request flow
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
     A["👤 User opens web app"] --> B["🔑 Login form"]
     B --> C["🔌 POST /api/auth/login"]
@@ -148,11 +148,11 @@ flowchart TD
     H -->|"Employee"| J["👤 Own linked profile only"]
     I --> K["🗄️ PostgreSQL"]
     J --> K
-\`\`\`
+```
 
 ### 3. 🧩 Service architecture
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     U["🌍 Browser"] --> FE["⚛️ React + Vite"]
     FE -->|"/api requests"| BE["🟩 Express API"]
@@ -163,7 +163,7 @@ flowchart LR
       BE
       DB
     end
-\`\`\`
+```
 
 ## 🚀 Getting Started (Local Setup)
 
@@ -178,24 +178,24 @@ flowchart LR
 
 From the repository root, enter the application folder:
 
-\`\`\`bash
+```bash
 git clone https://github.com/kunald-89/employee-management-system.git
 cd employee-management-system/code/employee-management-system
-\`\`\`
+```
 
 ### 2️⃣ Configure environment variables
 
 **Windows PowerShell:**
 
-\`\`\`powershell
+```powershell
 Copy-Item .env.example .env
-\`\`\`
+```
 
 **Linux / macOS:**
 
-\`\`\`bash
+```bash
 cp .env.example .env
-\`\`\`
+```
 
 Open the local .env file and replace the example values. Use a unique JWT secret of at least 32 characters and a strong bootstrap administrator password of at least 14 characters.
 
@@ -203,9 +203,9 @@ Open the local .env file and replace the example values. Use a unique JWT secret
 
 ### 3️⃣ Start the application
 
-\`\`\`bash
+```bash
 docker compose up --build
-\`\`\`
+```
 
 Docker Compose starts the PostgreSQL database, backend API and frontend web server.
 
@@ -220,33 +220,33 @@ Sign in with the bootstrap administrator email and password configured in your l
 
 ### 5️⃣ Stop the application
 
-\`\`\`bash
+```bash
 docker compose down
-\`\`\`
+```
 
 To also delete the local database volume and its data (⚠️ destructive):
 
-\`\`\`bash
+```bash
 docker compose down -v
-\`\`\`
+```
 
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Access | Description |
 |---|---|---|---|
-| GET | \`/api/health\` | Public | API and database health check |
-| POST | \`/api/auth/login\` | Public | Authenticate and receive JWT |
-| GET | \`/api/auth/me\` | Authenticated | Get current account details |
-| GET | \`/api/employees\` | Admin / HR | List employee records |
-| POST | \`/api/employees\` | Admin / HR | Create an employee record |
-| GET | \`/api/employees/me\` | Authenticated | Get the current user's linked employee profile |
-| POST | \`/api/chat\` | Authenticated | Optional AI assistant endpoint |
+| GET | `/api/health` | Public | API and database health check |
+| POST | `/api/auth/login` | Public | Authenticate and receive JWT |
+| GET | `/api/auth/me` | Authenticated | Get current account details |
+| GET | `/api/employees` | Admin / HR | List employee records |
+| POST | `/api/employees` | Admin / HR | Create an employee record |
+| GET | `/api/employees/me` | Authenticated | Get the current user's linked employee profile |
+| POST | `/api/chat` | Authenticated | Optional AI assistant endpoint |
 
 Protected endpoints require this HTTP header:
 
-\`\`\`http
+```http
 Authorization: Bearer <your-jwt-token>
-\`\`\`
+```
 
 ## 👥 Roles and Permissions
 
@@ -291,25 +291,25 @@ The ansible playbook is a basic Ubuntu host preparation example. Define and revi
 
 Backend syntax check:
 
-\`\`\`bash
+```bash
 cd backend
 npm install
 npm run check
-\`\`\`
+```
 
 Frontend production build:
 
-\`\`\`bash
+```bash
 cd frontend
 npm install
 npm run build
-\`\`\`
+```
 
 API health check after starting services:
 
-\`\`\`bash
+```bash
 node tests/healthcheck.mjs
-\`\`\`
+```
 
 See [tests/README.md](tests/README.md) for suggested additional automated test coverage.
 
