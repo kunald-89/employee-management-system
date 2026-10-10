@@ -27,7 +27,7 @@ The **Employee Management System** is a learning-focused full-stack project for 
 
 - 🔑 JWT-based login and authentication.
 - 🛡️ Role-based authorization for **Admin**, **HR** and **Employee** users.
-- 🧑‍💼 Admin/HR can view the employee directory and add employee records.
+- 🧑‍💼 Admin/HR can view, add, edit and delete employee records.
 - 👤 Employees can view only the profile linked to their account.
 - 🗄️ PostgreSQL database with an initialization migration.
 - 🐳 Docker Compose workflow for local development.
@@ -239,6 +239,8 @@ docker compose down -v
 | GET | `/api/auth/me` | Authenticated | Get current account details |
 | GET | `/api/employees` | Admin / HR | List employee records |
 | POST | `/api/employees` | Admin / HR | Create an employee record |
+| PUT | `/api/employees/:id` | Admin / HR | Update an employee record |
+| DELETE | `/api/employees/:id` | Admin / HR | Delete an employee record |
 | GET | `/api/employees/me` | Authenticated | Get the current user's linked employee profile |
 | POST | `/api/chat` | Authenticated | Optional AI assistant endpoint |
 
@@ -252,11 +254,11 @@ Authorization: Bearer <your-jwt-token>
 
 | Role | Permissions |
 |---|---|
-| 👑 Admin | View employee directory, add employee records and access own account |
-| 🧑‍💼 HR | View employee directory, add employee records and access own account |
+| 👑 Admin | View, add, edit and delete employee records and access own account |
+| 🧑‍💼 HR | View, add, edit and delete employee records and access own account |
 | 👤 Employee | View only the employee profile linked to their login |
 
-**Note:** The starter currently provides list/create employee operations. Full edit/delete workflows and a secure employee-account linking/provisioning process still need to be implemented.
+**Note:** Employee create, update and delete actions are available to Admin/HR roles through both the API and dashboard. A secure employee-account linking/provisioning process still needs to be implemented.
 
 ## ⚙️ DevOps and Deployment
 
@@ -326,7 +328,8 @@ See [tests/README.md](tests/README.md) for suggested additional automated test c
 
 ## 🛣️ Future Improvements
 
-- [ ] ✏️ Add employee update and delete operations with audit logging.
+- [x] ✏️ Add employee update and delete operations.
+- [ ] 🧾 Add audit logging for employee record changes.
 - [ ] 🔗 Build a secure employee-account invitation and linking workflow.
 - [ ] 🔁 Add password reset and token lifecycle management.
 - [ ] 🧪 Add unit, integration and end-to-end tests.
