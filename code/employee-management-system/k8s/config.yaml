@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ems-config
+  namespace: ems
+data:
+  PORT: "5000"
+  FRONTEND_ORIGIN: "https://ems.example.com"
+  JWT_EXPIRES_IN: "30m"
+  OPENAI_MODEL: "gpt-5.5"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ems-secrets
+  namespace: ems
+type: Opaque
+stringData:
+  DATABASE_URL: "REPLACE_WITH_SECRET_MANAGER_VALUE"
+  JWT_SECRET: "REPLACE_WITH_32_PLUS_RANDOM_CHARACTERS"
+  BOOTSTRAP_ADMIN_EMAIL: "admin@example.com"
+  BOOTSTRAP_ADMIN_PASSWORD: "REPLACE_WITH_STRONG_PASSWORD"
+  OPENAI_API_KEY: ""
+# Replace placeholders. Prefer AWS Secrets Manager / External Secrets for production.
