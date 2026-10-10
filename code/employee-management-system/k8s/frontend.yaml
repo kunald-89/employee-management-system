@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ems-frontend
+  namespace: ems
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: ems-frontend }
+  template:
+    metadata:
+      labels: { app: ems-frontend }
+    spec:
+      containers:
+        - name: frontend
+          image: YOUR_ACCOUNT.dkr.ecr.REGION.amazonaws.com/ems-frontend:latest
+          ports: [{ containerPort: 80 }]
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 256Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ems-frontend
+  namespace: ems
+spec:
+  selector: { app: ems-frontend }
+  ports: [{ port: 80, targetPort: 80 }]
