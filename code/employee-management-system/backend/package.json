@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check config/db.js && node --check middleware/auth.js && node --check controllers/authController.js && node --check controllers/employeeController.js && node --check routes/employeeRoutes.js",
+    "check": "node --check server.js && node --check config/db.js && node --check middleware/auth.js && node --check controllers/authController.js && node --check controllers/employeeController.js && node --check controllers/chatController.js && node --check routes/authRoutes.js && node --check routes/employeeRoutes.js && node --check routes/chatRoutes.js && node --check tests/api.integration.test.js",
     "test:api": "node --test tests/api.integration.test.js"
   },
   "dependencies": {
