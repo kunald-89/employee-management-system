@@ -3,7 +3,7 @@ import LoginForm from "../components/LoginForm.jsx";
 import Header from "../components/Header.jsx";
 import EmployeeForm from "../components/EmployeeForm.jsx";
 import EmployeeTable from "../components/EmployeeTable.jsx";
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API = import.meta.env.VITE_API_URL || "/api";
 async function request(path, options = {}) {
   const { token, ...rest } = options;
   const response = await fetch(API + path, { ...rest, headers: { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}), ...(rest.headers || {}) } });
