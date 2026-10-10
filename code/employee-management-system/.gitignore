@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.pem
+*.key
+postgres-data/
