@@ -270,6 +270,7 @@ The root Jenkinsfile currently runs:
 2. 🧩 Install backend dependencies and run JavaScript syntax checks.
 3. 🏗️ Install frontend dependencies and create a production build.
 4. 🐳 Build application container images using Docker Compose.
+5. 🧪 Start the Compose stack and run API integration tests.
 
 Run Jenkins on an agent with Git, Node.js/npm and Docker/Compose installed.
 
