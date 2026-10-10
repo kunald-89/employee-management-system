@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: ems-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/ems}
+    username: ${DB_USERNAME:ems_app}
+    password: ${DB_PASSWORD:ems_local_password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    default-property-inclusion: non_null
+
+app:
+  cors:
+    allowed-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO
