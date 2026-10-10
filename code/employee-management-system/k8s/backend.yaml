@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ems-backend
+  namespace: ems
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: ems-backend }
+  template:
+    metadata:
+      labels: { app: ems-backend }
+    spec:
+      containers:
+        - name: backend
+          image: YOUR_ACCOUNT.dkr.ecr.REGION.amazonaws.com/ems-backend:latest
+          ports: [{ containerPort: 5000 }]
+          envFrom:
+            - configMapRef: { name: ems-config }
+            - secretRef: { name: ems-secrets }
+          readinessProbe:
+            httpGet: { path: /api/health, port: 5000 }
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet: { path: /api/health, port: 5000 }
+            initialDelaySeconds: 20
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ems-backend
+  namespace: ems
+spec:
+  selector: { app: ems-backend }
+  ports: [{ port: 5000, targetPort: 5000 }]
