@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ems-ingress
+  namespace: ems
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - host: ems.example.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service: { name: ems-backend, port: { number: 5000 } }
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: ems-frontend, port: { number: 80 } }
+# Requires AWS Load Balancer Controller, DNS, TLS and real image names.
