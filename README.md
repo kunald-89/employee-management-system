@@ -14,3 +14,7 @@ Download `employee-management-system-project.zip` from this repository and extra
 See `docs/PROJECT_GUIDE.md` and `docs/ARCHITECTURE.md` inside the extracted project for setup details and workflow diagrams.
 
 > Learning starter only—not production-ready. Do not use real HR data before a security review. AWS resources have not been provisioned. Cloud services and AI API usage may incur charges.
+
+
+## Application source code
+The complete starter application is organized under [`code/employee-management-system/`](code/employee-management-system/). Start with its [project README](code/employee-management-system/README.md). It contains the React frontend, Express backend, PostgreSQL migration, Docker Compose, Jenkins pipeline, Kubernetes manifests, Terraform templates, Ansible playbook, and test guidance.
