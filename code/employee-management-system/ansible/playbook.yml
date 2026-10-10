@@ -1,0 +1,23 @@
+---
+- name: Prepare Ubuntu hosts for container workloads
+  hosts: ems_hosts
+  become: true
+  tasks:
+    - name: Install prerequisite packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+        update_cache: true
+    - name: Install Docker engine package
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+    - name: Ensure Docker service is enabled and running
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+# Define a reviewed inventory group [ems_hosts] before running this playbook.
