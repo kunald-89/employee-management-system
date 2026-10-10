@@ -8,6 +8,7 @@ The API integration test checks:
 
 - API health and PostgreSQL connectivity.
 - Protected employee directory access (missing JWT is rejected).
+- Role-based access control (an Employee JWT cannot list or create HR records).
 - Invalid and valid administrator login.
 - Employee request validation.
 - Employee creation and duplicate-email handling.
