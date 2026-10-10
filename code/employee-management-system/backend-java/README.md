@@ -5,28 +5,25 @@ Spring Boot backend foundation for the Employee Management System.
 ## Requirements
 - Java 21
 - Maven 3.9+
-- PostgreSQL 15+
+- Docker Desktop (for the local PostgreSQL container)
 
-## Configure
-Set these environment variables before starting the application:
+## Start PostgreSQL on Windows
+From the `code/employee-management-system` folder, make sure the existing `.env` file has the database values, then run:
+
+```powershell
+docker compose up -d db
+```
+
+The Compose file publishes PostgreSQL only on `127.0.0.1:5432` for local development.
+
+## Configure and run
+Open a new PowerShell window, navigate to this folder, and set the connection values. Use the same password configured as `POSTGRES_PASSWORD` in the project-root `.env` file.
 
 ```powershell
 $env:DATABASE_URL = "jdbc:postgresql://localhost:5432/ems"
 $env:DB_USERNAME = "ems_app"
 $env:DB_PASSWORD = "your-local-password"
 $env:FRONTEND_ORIGIN = "http://localhost:5173"
-```
-
-## Run on Windows
-From this folder:
-
-```powershell
-mvnw.cmd spring-boot:run
-```
-
-If Maven Wrapper has not yet been added, use:
-
-```powershell
 mvn spring-boot:run
 ```
 
@@ -54,4 +51,7 @@ Example request:
 }
 ```
 
-> Migration note: this is the first Java API foundation. Authentication, role-based authorization, database migrations, integration tests, and Docker/Jenkins integration are subsequent steps. The existing Node.js backend remains in the repository until the Java replacement is fully implemented and verified.
+## Important migration status
+This is the first Java API foundation. The current employee endpoints and React CRUD screen are intended for local development only. The temporary Spring Security configuration permits requests so the initial UI can be connected; **do not deploy this version**. JWT authentication, ADMIN / HR / EMPLOYEE authorization, database migrations, integration tests, and Docker/Jenkins integration are still to be implemented.
+
+The existing Node.js backend remains in the repository and the default `main` branch is unchanged. The Java migration is being developed on `feature/java-spring-react-foundation` until it is complete and verified.
