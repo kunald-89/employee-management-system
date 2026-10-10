@@ -291,12 +291,13 @@ The ansible playbook is a basic Ubuntu host preparation example. Define and revi
 
 ## 🧪 Basic Checks
 
-Backend syntax check:
+Backend syntax and API integration tests (start Docker Compose first; see [tests/README.md](tests/README.md)):
 
 ```bash
 cd backend
 npm install
 npm run check
+npm run test:api
 ```
 
 Frontend production build:
@@ -313,7 +314,7 @@ API health check after starting services:
 node tests/healthcheck.mjs
 ```
 
-See [tests/README.md](tests/README.md) for suggested additional automated test coverage.
+See [tests/README.md](tests/README.md) for the Windows 11 step-by-step testing guide and current test coverage. The test suite uses a local development database and should never be run against production data.
 
 ## 🔐 Security Notes
 
