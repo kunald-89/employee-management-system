@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
+import jwt from "jsonwebtoken";
 import test from "node:test";
 import assert from "node:assert/strict";
 
@@ -39,6 +40,20 @@ test("EMS API integration: health, authentication and employee CRUD", async () =
 
   const noToken = await api("/api/employees");
   assert.equal(noToken.response.status, 401, "Employee directory must require authentication.");
+
+  const employeeToken = jwt.sign(
+    { sub: "999999999", role: "employee" },
+    process.env.JWT_SECRET,
+    { expiresIn: "5m", issuer: "ems-api", audience: "ems-web" }
+  );
+  const employeeDirectory = await api("/api/employees", { token: employeeToken });
+  assert.equal(employeeDirectory.response.status, 403, "Employee role must not access the HR directory.");
+  const employeeCreate = await api("/api/employees", {
+    token: employeeToken,
+    method: "POST",
+    body: JSON.stringify({ firstName: "Not", lastName: "Allowed", email: "blocked@example.test", department: "Test", jobTitle: "Employee" })
+  });
+  assert.equal(employeeCreate.response.status, 403, "Employee role must not create employee records.");
 
   const invalidLogin = await api("/api/auth/login", {
     method: "POST",
