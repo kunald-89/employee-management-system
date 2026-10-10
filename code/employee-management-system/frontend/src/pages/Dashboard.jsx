@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const TODAY_LABEL = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).toUpperCase();
 const EMPTY_FORM = {
   employeeCode: "", firstName: "", lastName: "", email: "",
   department: "Engineering", designation: "", status: "ACTIVE", joiningDate: ""
@@ -124,7 +125,7 @@ export default function Dashboard() {
       <main className="main-area">
         <header className="topbar"><div className="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div><div className="top-actions"><button className="icon-button" aria-label="Notifications">♧<i /></button><div className="top-avatar">KD</div></div></header>
         <div className="content">
-          <section className="welcome-row"><div><div className="date-label">MONDAY, OCTOBER 12, 2026</div><h1>Good morning, Kunal <span>✦</span></h1><p>Here’s what’s happening with your team today.</p></div><button className="primary-button" onClick={openCreate}><span>＋</span> Add employee</button></section>
+          <section className="welcome-row"><div><div className="date-label">{TODAY_LABEL}</div><h1>Good morning, Kunal <span>✦</span></h1><p>Here’s what’s happening with your team today.</p></div><button className="primary-button" onClick={openCreate}><span>＋</span> Add employee</button></section>
 
           {error && <div className="alert" role="alert"><span>!</span>{error}<button onClick={() => setError("")}>×</button></div>}
 
